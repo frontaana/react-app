@@ -6,11 +6,13 @@ function ProjectsSection() {
   return (
     <div>
       {/* <h2>Проекты</h2> */}
-      <Heading />
+      <Heading 
+        level='h2'
+        text='Проекты'/>
       <ProjectCard />
       <ProjectCard />
       <ProjectCard />
-      <Button />
+      <Button text='Смотреть все проекты'/>
     </div>
   )
 }

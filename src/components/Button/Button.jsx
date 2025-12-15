@@ -1,7 +1,7 @@
-function Button() {
+function Button(props) {
   return (
-    <button>Посмотреть услуги</button>
-  )
+    <button>{props.text}</button>
+  );
 }
 
 export default Button

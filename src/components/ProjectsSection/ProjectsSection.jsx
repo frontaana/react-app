@@ -35,7 +35,6 @@ const projects = [
 function ProjectsSection() {
   return (
     <div>
-      {/* <h2>Проекты</h2> */}
       <Heading 
         level='h2'
         text='Проекты'/>

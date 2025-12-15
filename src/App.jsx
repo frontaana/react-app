@@ -1,18 +1,25 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 import ProjectsSection from "./components/ProjectsSection/ProjectsSection"
 import HeroSection from "./components/HeroSection/HeroSection"
 import AboutSection from "./components/AboutSection/AboutSection"
 import Button from "./components/Button/Button"
 import Counter from "./components/Counter/Counter";
+import Logs from "./components/Logs/Logs";
 
 const INITIAL_COUNTER = 0;
 const COUNTER_STEP = 1;
 const MIN_COUNTER_VALUE = -5;
 const MAX_COUNTER_VALUE = 5;
+const USER_ACTIONS = {
+  MINUS: 'minus',
+  PLUS: 'plus',
+}
 
 function App() {
   const [counter, setCounter] = useState(INITIAL_COUNTER)
+  const [logs, setLogs] = useState([]) 
 
   function handleClick() {
     alert('clicked')
@@ -28,11 +35,31 @@ function App() {
   }
 
   function handlePlusBtnClick() {
-    setCounter(counter + COUNTER_STEP)
+    const newCounter = counter + COUNTER_STEP;
+
+    const log = {
+      id: uuidv4(),
+      action: USER_ACTIONS.PLUS,
+      prevValue: counter,
+      newValue: newCounter,
+    }
+
+    setCounter(newCounter)
+    setLogs([...logs, log])
   }
 
   function handleMinusBtnClick() {
-    setCounter(counter - COUNTER_STEP)
+    const newCounter = counter - COUNTER_STEP;
+
+    const log = {
+      id: uuidv4(),
+      action: USER_ACTIONS.MINUS,
+      prevValue: counter,
+      newValue: newCounter,
+    }
+
+    setCounter(newCounter)
+    setLogs([...logs, log]);
   }
 
   function isBtnDisabled(value) {
@@ -70,6 +97,8 @@ function App() {
             text={'+'}
             isDisabled={isBtnDisabled(MAX_COUNTER_VALUE)}
             onClick={handlePlusBtnClick}/>
+
+          <Logs logs={logs} />
         </div>
       </div>
       

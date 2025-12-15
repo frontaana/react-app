@@ -1,6 +1,12 @@
-function Counter({ value }) {
+import './Counter.css';
+
+function Counter({ value, isDanger }) {
+  const classNames = isDanger ? 'counter counter_danger' : 'counter';
+
   return (
-    <p>Счетчик: {value}</p>
+    <p className={classNames}>
+      Счетчик: {value}
+    </p>
   );
 }
 

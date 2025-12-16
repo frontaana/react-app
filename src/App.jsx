@@ -7,6 +7,7 @@ import AboutSection from "./components/AboutSection/AboutSection"
 import Button from "./components/Button/Button"
 import Counter from "./components/Counter/Counter";
 import Logs from "./components/Logs/Logs";
+import User from "./components/User/User";
 
 const INITIAL_COUNTER = 0;
 const COUNTER_STEP = 1;
@@ -77,7 +78,7 @@ function App() {
         <AboutSection />
         <ProjectsSection />
       </div>
-      <div>
+      <div className="container">
         <a
           onClick={handleLinkClick}
           onMouseOver={handleMouseOver}
@@ -101,7 +102,9 @@ function App() {
           <Logs logs={logs} />
         </div>
       </div>
-      
+      <div className="container">
+        <User />
+      </div>
     </>
   )
 }

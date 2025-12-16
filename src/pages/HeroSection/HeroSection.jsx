@@ -1,4 +1,4 @@
-import Heading from "../Heading/heading"
+import Heading from "../../components/Heading/heading"
 import './HeroSection.css'
 
 function HeroSection() {

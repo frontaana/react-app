@@ -1,5 +1,5 @@
-import Button from '../Button/Button'
-import Heading from "../Heading/heading"
+import Button from '../../components/Button/Button'
+import Heading from "../../components/Heading/heading"
 
 function AboutSection() {
   return (

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-import ProjectsSection from "./components/ProjectsSection/ProjectsSection"
-import HeroSection from "./components/HeroSection/HeroSection"
-import AboutSection from "./components/AboutSection/AboutSection"
+import ProjectsSection from "./pages/ProjectsSection/ProjectsSection";
+import HeroSection from "./pages/HeroSection/HeroSection";
+import AboutSection from "./pages/AboutSection/AboutSection"
 import Button from "./components/Button/Button"
 import Counter from "./components/Counter/Counter";
 import Logs from "./components/Logs/Logs";
@@ -21,10 +21,6 @@ const USER_ACTIONS = {
 function App() {
   const [counter, setCounter] = useState(INITIAL_COUNTER)
   const [logs, setLogs] = useState([]) 
-
-  function handleClick() {
-    alert('clicked')
-  }
 
   function handleMouseOver() {
     console.log('onMouseOver')
@@ -83,9 +79,6 @@ function App() {
           onClick={handleLinkClick}
           onMouseOver={handleMouseOver}
           href="https://www.google.com">Ссылка</a>
-        <Button
-          text='Нажми меня'
-          onClick={handleClick}/>
         <div>
           <Counter
             value={counter}

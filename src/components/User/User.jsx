@@ -143,4 +143,14 @@ function User() {
   );
 }
 
+// shift + option + F
+
+// плейсхолдеры - разные стили
+// пароль и повторение пароля совпадали 
+// галочка
+// алерт сообщение - регистрация прошла успешно
+
+// http://jsonplaceholder.typicode.com/users
+// firebase на бэке с
+
 export default User;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 import ProjectsSection from "./pages/ProjectsSection/ProjectsSection";
@@ -20,7 +20,12 @@ const USER_ACTIONS = {
 
 function App() {
   const [counter, setCounter] = useState(INITIAL_COUNTER)
-  const [logs, setLogs] = useState([]) 
+  const [logs, setLogs] = useState([])
+  const [count, setCount] = useState(0);
+  const [users, setUsers] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+ 
 
   function handleMouseOver() {
     console.log('onMouseOver')
@@ -67,12 +72,61 @@ function App() {
     return counter <= MIN_COUNTER_VALUE || counter >= MAX_COUNTER_VALUE;
   }
 
+  // useEffect(() => {
+  //   localStorage.setItem('count', count)
+  // }, [count])
+
+  function handleBtnClick() {
+    setCount(count + 1)
+    localStorage.setItem('count', count)
+  }
+
+  console.log('component rendered');
+  // snippets в vscode - fetch & axios snippets | simple react snippets
+  
+  // используй, когда взаимодействуешь со сторонней системой (бекенд, localstorage, ),
+  // и ты хочешь чтобы данные приложения были засинхронизированы с внешней системой
+  useEffect(() => {
+    setIsLoading(true);
+    setIsError(false);
+
+    fetch('http://jsonplaceholder.typicode.com/users')
+      .then(response => {
+        if (!response.ok) {
+          console.error('с запросом что-то не так', response);
+          throw new Error('Ошибка в запросе')
+        }
+
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        setUsers(data);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error(error);
+        setIsLoading(true);
+        setIsError(true);
+      })
+
+    // dependencies list - список зависимостей - 
+  }, [])
+
   return (
     <>
       <div className="container">
         <HeroSection />
         <AboutSection />
         <ProjectsSection />
+      </div>
+      <div>
+        {count}
+        <div>
+          <button onClick={handleBtnClick}> 
+            Счетчик++
+          </button>
+        </div>
       </div>
       <div className="container">
         <a
@@ -97,6 +151,11 @@ function App() {
       </div>
       <div className="container">
         <User />
+      </div>
+      <div className="container">
+        { isError ? 'ошибка запроса' : '' }
+        { isLoading ? 'загрузка...' : '' }
+        { users ? JSON.stringify(users) : '' }
       </div>
     </>
   )
